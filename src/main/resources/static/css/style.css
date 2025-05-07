@@ -1,0 +1,71 @@
+.chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.chat-message {
+    background-color: #f8f9fa;
+}
+
+.system-message {
+    background-color: #e9ecef;
+    font-style: italic;
+}
+
+.join-message {
+    background-color: #d4edda;
+}
+
+.leave-message {
+    background-color: #f8d7da;
+}
+
+.action-message {
+    background-color: #fff3cd;
+}
+
+.private-message {
+    background-color: #cce5ff;
+    border-left: 3px solid #007bff;
+}
+
+.incoming-private {
+    background-color: #e2f0fd;
+    border-left: 3px solid #007bff;
+    margin-right: 20%;
+}
+
+.outgoing-private {
+    background-color: #d4f1d4;
+    border-left: 3px solid #28a745;
+    margin-left: 20%;
+    text-align: right;
+}
+
+#onlineUsers {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.emoji-picker {
+    cursor: pointer;
+}
+
+/* Добавим анимацию для новых сообщений */
+.message.new-message {
+    animation: highlight 1.5s;
+}
+
+@keyframes highlight {
+    from { background-color: #ffff99; }
+    to { background-color: inherit; }
+}
