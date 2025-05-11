@@ -15,13 +15,6 @@ public class ChatMessage {
         this.type = type;
     }
 
-    public ChatMessage(String sender, String receiver, String content, String type) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.content = content;
-        this.type = type;
-    }
-
     public String getSender() {
         return sender;
     }

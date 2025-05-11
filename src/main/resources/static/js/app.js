@@ -55,7 +55,9 @@ class ChatApp {
         this.stompClient.connect({}, (frame) => {
             this.connected = true;
             this.updateUI();
+
             console.log("Connected to server, setting up subscriptions...");
+
             this.setupSubscriptions();
             this.notifyJoin();
         }, (error) => {
@@ -175,7 +177,9 @@ class ChatApp {
     }
 
     displayPrivateMessage(message) {
+
         console.log("Received private message:", message);
+
         let messageElement;
         const isIncoming = message.sender !== this.username;
 

@@ -60,7 +60,7 @@ public class WebSocketController {
                     createHeaders(receiverSessionId));
 
         } catch (Exception e) {
-            System.out.println("Message: " + e.getMessage());
+            System.out.println("Error sending private message: " + e.getMessage());
         }
     }
 
@@ -69,12 +69,16 @@ public class WebSocketController {
             if (sessionId != null && sessionToUser.containsKey(sessionId)) {
                 ChatMessage errorMessage = new ChatMessage("SERVER", error, "ERROR");
                 messagingTemplate.convertAndSendToUser(sessionId, "/queue/errors", errorMessage);
-                System.out.println("Error sent to session ID: " + sessionId + ", Error message: " + error);
+
+                System.out.println("Error sent to session ID: "
+                        + sessionId
+                        + ". Error: "
+                        + error);
             } else {
                 System.out.println("Session ID is null or not found in sessionToUser map.");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error sending error message: " + e.getMessage());
         }
     }
 
@@ -82,12 +86,20 @@ public class WebSocketController {
     @SendTo("/topic/public")
     public ChatMessage addUser(ChatMessage message, SimpMessageHeaderAccessor headerAccessor) {
         if (message.getSender() == null || message.getSender().trim().isEmpty()) {
+
+            System.out.println("Username is empty");
+
             return new ChatMessage("SERVER", "Имя пользователя не может быть пустым", "ERROR");
         }
 
         String sessionId = headerAccessor.getSessionId();
         sessionToUser.put(sessionId, message.getSender());
         userToSession.put(message.getSender(), sessionId);
+
+        System.out.println("User "
+                + message.getSender()
+                + " joined the chat with session ID: "
+                + sessionId);
 
         return new ChatMessage("SERVER", message.getSender() + " присоединился к чату", "JOIN");
     }
